@@ -10,7 +10,7 @@ python main.py -e -p 4046 -l 074
 ```
 Já o trecho de código abaixo mostra um exemplo de uso da função obter\_estimativas\_de\_ponto que retorna um dicionário contendo estimativas de horários de chegada das linhas que passam naquele ponto:
 
-```
+```python
 from itinerario_vitoria import *
 import datetime
 
