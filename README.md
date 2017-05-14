@@ -72,13 +72,13 @@ Atributos:
 
 ### Métodos
 
-\# _***obter_estimativas_de_ponto(pontoIdentificador)***_
+\# _***obter\_estimativas\_de\_ponto(pontoIdentificador)***_
 
 Retorna estimativas de horário de chegada de todos os ônibus em um ponto
 
-@Parâmetro pontoIdentificador: String contendo o número de identificação do ponto do qual se deseja obter as estimativas
+_@Parâmetro_ pontoIdentificador: String contendo o número de identificação do ponto do qual se deseja obter as estimativas
 
-@Retorno: Retorna um dicionário de estimativas cujo a chave é uma tupple no formato (NumeroDaLinha, Bandeira)
+_@Retorno_: Retorna um dicionário de estimativas cujo a chave é uma tupple no formato (NumeroDaLinha, Bandeira)
 e os itens são listas de objetos do tipo cEstimativa pertencentes a cada linha de ônibus.
 
 Exemplo de uso:
@@ -98,13 +98,13 @@ for key in dictEstimativas.keys():
 	print ''
 ```
 
-\# _***obter_pontos(listaIdentificadores)***_
+\# _***obter\_pontos(listaIdentificadores)***_
 
 Retorna lista de objetos do tipo cPontoDeOnibus contendo os dados dos pontos passados por parâmetro.
 
-@Parâmetro listaIdentificadores: Lista com os numeros de identificação dos pontos dos quais se deseja obter as informações
+_@Parâmetro_ listaIdentificadores: Lista com os numeros de identificação dos pontos dos quais se deseja obter as informações
 
-@Retorno: lista de objetos do tipo cPontoDeOnibus
+_@Retorno_: lista de objetos do tipo cPontoDeOnibus
 
 ## Autores
 
