@@ -4,7 +4,7 @@ Um módulo python que contém funções e classes que permitem a manipulação e
 
 ## Utilização
 
-O módulo contém um script(main.py) para permitir o uso de algumas funções básicas pelo terminal. O comando abaixo, por exemplo, permite visualizar as previsões de chegada da linha 074 - Tabuazeiro/Circular no ponto 4046.
+O módulo contém um script(main.py) que permite fazer o uso de algumas funções básicas pelo terminal. O comando abaixo, por exemplo, permite visualizar as previsões de chegada da linha 074 - Tabuazeiro/Circular no ponto 4046.
 ```
 python main.py -e -p 4046 -l 074
 ```
