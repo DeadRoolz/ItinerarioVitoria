@@ -1,14 +1,14 @@
 # Itinerário Vitória
 
-Um módulo python que contém funções e classes que auxiliam na manipulação e obtenção de informações sobre as linhas de ônibus e pontos da cidade de Vitória, bem como previsões de horários de chegada dos ônibus nesses pontos. As informações são obtidas do serviço Ponto Vitória e do site da PMV
+Um módulo python que contém funções e classes que permitem a manipulação e obtenção de informações sobre as linhas de ônibus e pontos da cidade de Vitória, bem como previsões de horários de chegada dos ônibus nesses pontos. As informações são obtidas do serviço **Ponto Vitória** e do site da PMV. O principal objetivo desse módulo é servir como base para quem deseja desenvolver aplicações que utilizam itinerários de ônibus, previsões de chegada, localização de pontos e outros serviços fornecidos pelo **Ponto Vitória**.
 
 ## Utilização
 
-O módulo contém um script(main.py) para permitir o uso de algumas funções básicas pelo terminal. O comando abaixo, por exemplo, permite visualizar as previsões de chegada da linha 074 - Tabuazeiro/Circular no ponto 4046
+O módulo contém um script(main.py) para permitir o uso de algumas funções básicas pelo terminal. O comando abaixo, por exemplo, permite visualizar as previsões de chegada da linha 074 - Tabuazeiro/Circular no ponto 4046.
 ```
 python main.py -e -p 4046 -l 074
 ```
-Já o trecho de código abaixo mostra um exemplo de uso da função obter\_estimativas\_de\_ponto que retorna um dicionário contendo estimativas de horários de chegada das linhas que passam naquele ponto:
+O trecho de código abaixo mostra um exemplo de uso da função obter\_estimativas\_de\_ponto que retorna um dicionário contendo estimativas de horários de chegada das linhas que passam naquele ponto:
 
 ```python
 from itinerario_vitoria import *
@@ -25,11 +25,15 @@ for key in dictEstimativas.keys():
 	print ''
 ```
 
-## Contribuição
+## Contribuindo
 
 Qualquer pessoa pode contribuir com o projeto, adicionando novas funcionalidades, corrigindo bugs, sugerindo algoritmos para melhorar o desempenho e etc.
 
+## Autores
+
+Desenvolvido por **Gean Paulo** - Email: gean.2007.8.9.0@gmail.com
+
 ## Licença
 
-leia LICENSE.TXT
+Esse projeto está licenciado sob a licença MIT - leia o arquivo LICENSE.TXT
 
