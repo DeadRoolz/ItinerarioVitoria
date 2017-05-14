@@ -39,7 +39,8 @@ Caso queira contribuir crie uma [Issue](https://github.com/DeadRoolz/ItinerarioV
 
 ### Classes
 
-\# _cLinhaDeOnibus_
+\# _***cLinhaDeOnibus***_
+
 Classe que representa as linhas de ônibus.
 
 Atributos: 
@@ -47,7 +48,8 @@ Atributos:
 * `Bandeira` - bandeira do ônibus(nome da linha) - Tipo: _str_
 * `Numero` - numero da linha - Tipo: _str_
 
-\# _cPontoDeOnibus_
+\# _***cPontoDeOnibus***_
+
 Classe que representa os pontos de ônibus.
 
 Atributos: 
@@ -56,7 +58,8 @@ Atributos:
 * `Logradouro` - logradouro em que o ponto está situado - Tipo: _str_
 * `PontoDeReferencia` - Ponto de referência próximo - Tipo: _str_
 
-\# _cEstimativa_
+\# _***cEstimativa***_
+
 Classe que representa estimativas de horários de chegada dos ônibus.
 
 Atributos: 
