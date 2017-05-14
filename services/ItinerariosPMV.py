@@ -9,7 +9,6 @@ import urllib2
 from HTMLParser import HTMLParser
 
 
-# create a subclass and override the handler methods
 class SiteItinerarioPMV(HTMLParser):
     
     def __init__(self, srvc):
@@ -21,7 +20,6 @@ class SiteItinerarioPMV(HTMLParser):
         self.Finished = False
         self.srvc = srvc
         self.FoundViaLink = False
-        
     
     def handle_starttag(self, tag, attrs):
     
