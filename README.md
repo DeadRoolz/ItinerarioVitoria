@@ -70,6 +70,41 @@ Atributos:
 * `HorarioDeChegada` - horário previsto de chegada no ponto (formato unix timestamp em milisegundos)  - Tipo: _int_
 * `Itinerarioid` - id da linha de ônibus ligada à estimativa  - Tipo: _int_
 
+### Métodos
+
+\# _***obter_estimativas_de_ponto(pontoIdentificador)***_
+
+Retorna estimativas de horário de chegada de todos os ônibus em um ponto
+
+@Parâmetro pontoIdentificador: String contendo o número de identificação do ponto do qual se deseja obter as estimativas
+
+@Retorno: Retorna um dicionário de estimativas cujo a chave é uma tupple no formato (NumeroDaLinha, Bandeira)
+e os itens são listas de objetos do tipo cEstimativa pertencentes a cada linha de ônibus.
+
+Exemplo de uso:
+
+```python
+from itinerario_vitoria import *
+import datetime
+
+dictEstimativas = obter_estimativas_de_ponto('4046')
+for key in dictEstimativas.keys():
+    print '---------------'
+    print 'Linha: ' + key[0] + ' - ' + key[1]
+    print '---------------'
+    
+    for estimativa in dictEstimativas[key]:
+        print 'Horario de Chegada: ' + datetime.datetime.fromtimestamp(estimativa.HorarioDeChegada/1000).ctime()
+	print ''
+```
+
+\# _***obter_pontos(listaIdentificadores)***_
+
+Retorna lista de objetos do tipo cPontoDeOnibus contendo os dados dos pontos passados por parâmetro.
+
+@Parâmetro listaIdentificadores: Lista com os numeros de identificação dos pontos dos quais se deseja obter as informações
+
+@Retorno: lista de objetos do tipo cPontoDeOnibus
 
 ## Autores
 
