@@ -115,27 +115,16 @@ def obter_pontos(listaIdentificadores):
     
     :returns: lista de objetos do tipo cPontoDeOnibus com as informações sobre cada ponto
     """
-    listaDePontosIds = []
             
     pontosFile = open('JSON/PontosDeOnibusVitoria.json')
     pontosJSON = json.load(pontosFile)
-
-    for pnt in pontosJSON['pontosDeParada']:
-        if pnt['identificador'] in listaIdentificadores:
-            listaDePontosIds.append(pnt['id'])
-    
-    
-    data = json.dumps({"listaIds":listaDePontosIds})
-    url = 'https://pmv.geocontrol.com.br/pontovitoria/svc/json/db/listarPontosDeParada'
-    req = urllib2.Request(url, data, {'Content-Type': 'application/json'})
-    f = urllib2.urlopen(req)
-    responseJSON = json.load(f)
-    f.close()
     
     listaPontosDeParada = []
-    
-    for ponto in responseJSON['pontosDeParada']:
-        listaPontosDeParada.append(cPontoDeOnibus(ponto['id'], ponto['identificador'], ponto['logradouro'], ponto['descricao']))
+
+    for ponto in pontosJSON['pontosDeParada']:
+        if ponto['identificador'] in listaIdentificadores:
+            listaPontosDeParada.append(cPontoDeOnibus(ponto['id'], ponto['identificador'], ponto['logradouro'], ponto['descricao']))
+        
         
     return listaPontosDeParada
 
