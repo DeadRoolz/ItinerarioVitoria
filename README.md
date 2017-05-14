@@ -29,6 +29,8 @@ for key in dictEstimativas.keys():
 
 Qualquer pessoa pode contribuir com o projeto, adicionando novas funcionalidades, corrigindo bugs, sugerindo algoritmos para melhorar o desempenho e etc.
 
+Caso queira contribuir crie uma [Issue](https://github.com/DeadRoolz/ItinerarioVitoria/issues) ou faça um [Pull Request](https://github.com/DeadRoolz/ItinerarioVitoria/pulls)
+
 ## Autores
 
 Desenvolvido por **Gean Paulo** - Email: gean.2007.8.9.0@gmail.com
