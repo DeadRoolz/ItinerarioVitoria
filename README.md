@@ -31,6 +31,43 @@ Qualquer pessoa pode contribuir com o projeto, adicionando novas funcionalidades
 
 Caso queira contribuir crie uma [Issue](https://github.com/DeadRoolz/ItinerarioVitoria/issues) ou faça um [Pull Request](https://github.com/DeadRoolz/ItinerarioVitoria/pulls)
 
+
+## Referência da API
+
+* [Classes](#Classes)
+* [Métodos](#Métodos)
+
+### Classes
+
+\# _cLinhaDeOnibus_
+Classe que representa as linhas de ônibus.
+
+Atributos: 
+* `id` - id da linha - Tipo: _int_
+* `Bandeira` - bandeira do ônibus(nome da linha) - Tipo: _str_
+* `Numero` - numero da linha - Tipo: _str_
+
+\# _cPontoDeOnibus_
+Classe que representa os pontos de ônibus.
+
+Atributos: 
+* `id` - id do ponto - Tipo: _int_
+* `Numero` - Número de identificação do ponto - Tipo: _str_
+* `Logradouro` - logradouro em que o ponto está situado - Tipo: _str_
+* `PontoDeReferencia` - Ponto de referência próximo - Tipo: _str_
+
+\# _cEstimativa_
+Classe que representa estimativas de horários de chegada dos ônibus.
+
+Atributos: 
+* `acessibilidade` - indica se o ponto possui acessibilidade para deficientes - Tipo: _Boolean_
+* `Linha` - Objeto que representa a linha de ônibus pertencente à estimativa - Tipo: _cLinhaDeOnibus_
+* `HorarioDePartida` - horário de partida do ônibus no ponto final (formato unix timestamp em milisegundos)  - Tipo: _int_
+* `HorarioDeTransmissao` - último horário em que o ônibus transmitiu sua localização (formato unix timestamp em milisegundos)  - Tipo: _int_
+* `HorarioDeChegada` - horário previsto de chegada no ponto (formato unix timestamp em milisegundos)  - Tipo: _int_
+* `Itinerarioid` - id da linha de ônibus ligada à estimativa  - Tipo: _int_
+
+
 ## Autores
 
 Desenvolvido por **Gean Paulo** - Email: gean.2007.8.9.0@gmail.com
@@ -38,4 +75,3 @@ Desenvolvido por **Gean Paulo** - Email: gean.2007.8.9.0@gmail.com
 ## Licença
 
 Esse projeto está licenciado sob a licença MIT - leia o arquivo LICENSE.TXT
-
