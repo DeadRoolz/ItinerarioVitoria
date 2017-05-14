@@ -207,7 +207,7 @@ def obter_itinerario_de_linha(cdLinha):
     que fazem parte do itinerario da linha
     
     """
-    Itin = ItinerariosPMV.Itinerario(str(cdLinha).zfill(4))
+    Itin = ItinerariosPMV.obter_itinerario(str(cdLinha).zfill(4))
     pontosDoItinerario = []
     TodosOsPontos = ObterTodosOsPontos()
     pntosRuaDoItinerario = []
