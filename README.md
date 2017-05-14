@@ -1,7 +1,9 @@
-#Itinerário Vitória#
+# Itinerário Vitória
+
 Um módulo python que contém funções e classes que auxiliam na manipulação e obtenção de informações sobre as linhas de ônibus e pontos da cidade de Vitória, bem como previsões de horários de chegada dos ônibus nesses pontos. As informações são obtidas do serviço Ponto Vitória e do site da PMV
 
-##Utilização
+## Utilização
+
 O módulo contém um script(main.py) para permitir o uso de algumas funções básicas pelo terminal. O comando abaixo, por exemplo, permite visualizar as previsões de chegada da linha 074 - Tabuazeiro/Circular no ponto 4046
 ```
 python main.py -e -p 4046 -l 074
@@ -23,9 +25,11 @@ for key in dictEstimativas.keys():
 	print ''
 ```
 
-##Contribuição
+## Contribuição
+
 Qualquer pessoa pode contribuir com o projeto, adicionando novas funcionalidades, corrigindo bugs, sugerindo algoritmos para melhorar o desempenho e etc.
 
-##Licença
+## Licença
+
 leia LICENSE.TXT
 
