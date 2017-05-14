@@ -1,4 +1,4 @@
-#Itinerário Vitória
+#Itinerário Vitória#
 Um módulo python que contém funções e classes que auxiliam na manipulação e obtenção de informações sobre as linhas de ônibus e pontos da cidade de Vitória, bem como previsões de horários de chegada dos ônibus nesses pontos. As informações são obtidas do serviço Ponto Vitória e do site da PMV
 
 ##Utilização
