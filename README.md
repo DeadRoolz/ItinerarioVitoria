@@ -92,6 +92,7 @@ for key in dictEstimativas.keys():
 	print ''
 ```
 
+
 \# ***obter\_pontos\(listaIdentificadores\)***
 
 Retorna lista de objetos do tipo cPontoDeOnibus contendo os dados dos pontos passados por parâmetro.
@@ -99,6 +100,7 @@ Retorna lista de objetos do tipo cPontoDeOnibus contendo os dados dos pontos pas
 `@Parâmetro listaIdentificadores` - Lista com os numeros de identificação dos pontos dos quais se deseja obter as informações
 
 `@Retorno` - lista de objetos do tipo cPontoDeOnibus
+
 
 
 \# ***pesquisar\_pontos\(stringDeBusca\)***
@@ -110,6 +112,7 @@ Pesquisa por pontos de ônibus utilizando uma string de busca.
 `@Retorno` - lista de objetos do tipo cPontoDeOnibus
 
 
+
 \# ***obter\_pontos\_de\_parada\(PontoIdentificador\)***
 
 Busca no Ponto Vitória por pontos que possuem linhas em comum com o ponto informado.
@@ -119,6 +122,7 @@ Busca no Ponto Vitória por pontos que possuem linhas em comum com o ponto infor
 `@Retorno` - lista de objetos do tipo cPontoDeOnibus
 
 
+
 \# ***obter\_itinerario\_de\_linha\(cdLinha\)***
 
 Retorna os pontos de ônibus que fazem parte do itinerário de determinada linha.
@@ -126,6 +130,7 @@ Retorna os pontos de ônibus que fazem parte do itinerário de determinada linha
 `@Parâmetro cdLinha` - Numero da linha da qual se deseja obter o itinerario
 
 `@Retorno` -  Lista com objetos do tipo cPontoDeOnibus representando todos os pontos que fazem parte do itinerario
+
 
 
 \# ***obter\_todos\_os\_pontos\(\)***
