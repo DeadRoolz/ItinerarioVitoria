@@ -110,7 +110,7 @@ def main(argv):
         print '-FIM-'
         
     elif (len(stringDeBusca) >= 4) and (len(listaDePontos) <= 0) and (len(listaDeLinhas) <= 0):
-        pontos = pesquisar_ponto(stringDeBusca)
+        pontos = pesquisar_pontos(stringDeBusca)
             
         for ponto in pontos:
             print 'Numero: ' + str(ponto.Numero)
