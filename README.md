@@ -25,12 +25,6 @@ for key in dictEstimativas.keys():
 	print ''
 ```
 
-## Contribuindo
-
-Qualquer pessoa pode contribuir com o projeto, adicionando novas funcionalidades, corrigindo bugs, sugerindo algoritmos para melhorar o desempenho e etc.
-
-Caso queira contribuir crie uma [Issue](https://github.com/DeadRoolz/ItinerarioVitoria/issues) ou faça um [Pull Request](https://github.com/DeadRoolz/ItinerarioVitoria/pulls)
-
 
 ## Referência da API
 
@@ -105,6 +99,48 @@ Retorna lista de objetos do tipo cPontoDeOnibus contendo os dados dos pontos pas
 `@Parâmetro listaIdentificadores` - Lista com os numeros de identificação dos pontos dos quais se deseja obter as informações
 
 `@Retorno` - lista de objetos do tipo cPontoDeOnibus
+
+
+\# ***pesquisar\_pontos\(stringDeBusca\)***
+
+Pesquisa por pontos de ônibus utilizando uma string de busca.
+
+`@Parâmetro stringDeBusca` - string que será utilizada para efetuar a busca no Ponto Vitória
+
+`@Retorno` - lista de objetos do tipo cPontoDeOnibus
+
+
+\# ***obter\_pontos\_de\_parada\(PontoIdentificador\)***
+
+Busca no Ponto Vitória por pontos que possuem linhas em comum com o ponto informado.
+
+`@Parâmetro PontoIdentificador` - Numero identificador do ponto do qual se deseja obter os pontos em comum
+
+`@Retorno` - lista de objetos do tipo cPontoDeOnibus
+
+
+\# ***obter\_itinerario\_de\_linha\(cdLinha\)***
+
+Retorna os pontos de ônibus que fazem parte do itinerário de determinada linha.
+
+`@Parâmetro cdLinha` - Numero da linha da qual se deseja obter o itinerario
+
+`@Retorno` -  Lista com objetos do tipo cPontoDeOnibus representando todos os pontos que fazem parte do itinerario
+
+
+\# ***obter\_todos\_os\_pontos\(\)***
+
+Retorna uma lista de objetos do tipo cPontoDeOnibus representando todos os pontos da cidade. 
+As informações são extraídas do arquivo JSON presente na pasta JSON/PontosDeOnibusVitoria.json
+
+`@Retorno` -  Lista com objetos do tipo cPontoDeOnibus representando todos os pontos da cidade
+
+
+## Contribuindo
+
+Qualquer pessoa pode contribuir com o projeto, adicionando novas funcionalidades, corrigindo bugs, sugerindo algoritmos para melhorar o desempenho e etc.
+
+Caso queira contribuir crie uma [Issue](https://github.com/DeadRoolz/ItinerarioVitoria/issues) ou faça um [Pull Request](https://github.com/DeadRoolz/ItinerarioVitoria/pulls)
 
 ## Autores
 
