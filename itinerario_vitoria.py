@@ -128,7 +128,7 @@ def obter_pontos(listaIdentificadores):
         
     return listaPontosDeParada
 
-def pesquisar_ponto(stringDeBusca):
+def pesquisar_pontos(stringDeBusca):
     """Pesquisa por pontos de ônibus utilizando uma string de busca
     
     :param stringDeBusca: string que será utilizada para efetuar a busca no Ponto Vitória
@@ -239,6 +239,8 @@ def obter_todos_os_pontos():
     """Retorna uma lista de objetos do tipo cPontoDeOnibus representando todos os pontos da cidade.
     
     As informações são extraídas do arquivo JSON presente na pasta JSON/PontosDeOnibusVitoria.json
+    
+    :returns: Lista com objetos do tipo cPontoDeOnibus representando todos os pontos da cidade.
     
     """
     pontos = []
