@@ -72,7 +72,7 @@ Atributos:
 
 ### Métodos
 
-\# _***obter\_estimativas\_de\_ponto\(pontoIdentificador\)***_
+\# ***obter\_estimativas\_de\_ponto\(pontoIdentificador\)***
 
 Retorna estimativas de horário de chegada de todos os ônibus em um ponto
 
