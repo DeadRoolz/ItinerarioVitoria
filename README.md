@@ -98,7 +98,7 @@ for key in dictEstimativas.keys():
 	print ''
 ```
 
-\# _***obter\_pontos\(listaIdentificadores\)***_
+\# ***obter\_pontos\(listaIdentificadores\)***
 
 Retorna lista de objetos do tipo cPontoDeOnibus contendo os dados dos pontos passados por parâmetro.
 
