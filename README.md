@@ -8,7 +8,7 @@ O módulo contém um script(main.py) que permite fazer o uso de algumas funçõe
 ```
 python main.py -e -p 4046 -l 074
 ```
-O trecho de código abaixo mostra um exemplo de uso da função obter\_estimativas\_de\_ponto que retorna um dicionário contendo estimativas de horários de chegada das linhas que passam naquele ponto:
+O trecho de código abaixo mostra um exemplo de uso da função obter\_estimativas\_de\_ponto para mostrar as estimativas de horários de chegada das linhas que passam naquele ponto:
 
 ```python
 from itinerario_vitoria import *
@@ -25,15 +25,14 @@ for est in listEstimativas:
         
 
 for key in dictEstimativas.keys():
-    if key[0] == NumeroLinha:
-        msg = '> Linha: ' + key[0] + ' - ' + key[1]
-        print '-' * (len(msg))
-        print msg
-        print '-' * (len(msg))
-        for estimativa in sorted(dictEstimativas[key], key=lambda est: est.horario_chegada()):                        
-            print '>> ' + 'acessibilidade: ' + str(estimativa.acessibilidade())
-            print '>> ' + 'Horario de Chegada: ' + estimativa.horario_chegada().ctime()
-            print ''
+    msg = '> Linha: ' + key[0] + ' - ' + key[1]
+    print '-' * (len(msg))
+    print msg
+    print '-' * (len(msg))
+    for estimativa in sorted(dictEstimativas[key], key=lambda est: est.horario_chegada()):                        
+        print '>> ' + 'acessibilidade: ' + str(estimativa.acessibilidade())
+        print '>> ' + 'Horario de Chegada: ' + estimativa.horario_chegada().ctime()
+        print ''
 ```
 
 
