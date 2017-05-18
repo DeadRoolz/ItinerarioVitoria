@@ -80,9 +80,9 @@ Classe que representa estimativas de horários de chegada dos ônibus.
 Atributos: 
 * `Acessibilidade` - indica se o ponto possui acessibilidade para deficientes - Tipo: _Boolean_
 * `Linha` - Objeto que representa a linha de ônibus pertencente à estimativa - Tipo: _cLinhaDeOnibus_
-* `HorarioDePartida` - horário de partida do ônibus no ponto final (formato unix timestamp em milisegundos)  - Tipo: _int_
-* `HorarioDeTransmissao` - último horário em que o ônibus transmitiu sua localização (formato unix timestamp em milisegundos)  - Tipo: _int_
-* `HorarioDeChegada` - horário previsto de chegada no ponto (formato unix timestamp em milisegundos)  - Tipo: _int_
+* `HorarioDePartida` - horário de partida do ônibus no ponto final - Tipo: datetime
+* `HorarioDeTransmissao` - último horário em que o ônibus transmitiu sua localização - Tipo: datetime
+* `HorarioDeChegada` - horário previsto de chegada no ponto - Tipo: datetime
 * `Itinerarioid` - id da linha de ônibus ligada à estimativa  - Tipo: _int_
 
 Métodos:
