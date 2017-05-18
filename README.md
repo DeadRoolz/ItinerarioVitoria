@@ -12,17 +12,28 @@ O trecho de código abaixo mostra um exemplo de uso da função obter\_estimativ
 
 ```python
 from itinerario_vitoria import *
-import datetime
 
-dictEstimativas = obter_estimativas_de_ponto('4046')
+listEstimativas = obter_estimativas_de_ponto('4046')
+dictEstimativas = {}
+
+for est in listEstimativas:
+    if dictEstimativas.has_key((est.linha().numero(), est.linha().bandeira())):
+        dictEstimativas[(est.linha().numero(), est.linha().bandeira())].append(est)
+    else:
+        dictEstimativas[(est.linha().numero(), est.linha().bandeira())] = []
+        dictEstimativas[(est.linha().numero(), est.linha().bandeira())].append(est)
+        
+
 for key in dictEstimativas.keys():
-    print '---------------'
-    print 'Linha: ' + key[0] + ' - ' + key[1]
-    print '---------------'
-    
-    for estimativa in dictEstimativas[key]:
-        print 'Horario de Chegada: ' + datetime.datetime.fromtimestamp(estimativa.HorarioDeChegada/1000).ctime()
-	print ''
+    if key[0] == NumeroLinha:
+        msg = '> Linha: ' + key[0] + ' - ' + key[1]
+        print '-' * (len(msg))
+        print msg
+        print '-' * (len(msg))
+        for estimativa in sorted(dictEstimativas[key], key=lambda est: est.horario_chegada()):                        
+            print '>> ' + 'acessibilidade: ' + str(estimativa.acessibilidade())
+            print '>> ' + 'Horario de Chegada: ' + estimativa.horario_chegada().ctime()
+            print ''
 ```
 
 
@@ -59,11 +70,8 @@ Atributos:
 
 Métodos:
 * `linhas() : List cPontoDeOnibus` - Retorna uma lista de objetos do tipo cPontoDeOnibus representando as linhas que passam nesse ponto
-
 * `numero() : str` - Retorna o número identificador do ponto
-
 * `logradouro() : str` - Retorna o logradouro em que o ponto está situado
-
 * `referencia() : str` - Retorna o ponto de referência desse ponto
 
 \# _***cEstimativa***_
