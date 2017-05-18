@@ -9,37 +9,89 @@ As informações são obtidas diretamente do serviço Ponto Vitória e do site d
 import urllib2
 import json
 from unicodedata import normalize
+import datetime
 
-from services import ItinerariosPMV
-from main import main
+from cli import *
 
 
 class cLinhaDeOnibus:
     """Armazena informações sobre linhas de ônibus"""
-    def __init__(self, id, Bandeira, Numero):
-        self.id = id
+    
+    def __init__(self, Id, Bandeira, Numero):
+        self.Id = Id
         self.Bandeira = Bandeira
         self.Numero = Numero
+        
+    def bandeira(self):
+        return self.Bandeira
+        
+    def numero(self):
+        return self.Numero
+    def id(self):
+        return self.Id
 
 
 class cPontoDeOnibus:
     """Armazena informações sobre pontos de ônibus"""
-    def __init__(self, id, NumeroIdentificacao, Logradouro, PontoDeReferencia):
-        self.id = id
-        self.Numero = NumeroIdentificacao
-        self.Logradouro = Logradouro
-        self.PontoDeReferencia = PontoDeReferencia
+    
+    def __init__(self, _Id, _NumeroIdentificacao, _Logradouro, _PontoDeReferencia, _linhas):
+        self.Id = _Id
+        self.Numero = _NumeroIdentificacao
+        self.Logradouro = _Logradouro
+        self.PontoDeReferencia = _PontoDeReferencia
+        self.Linhas = _linhas
+        
+    def linhas(self):
+        return self.Linhas
+        
+    def numero(self):
+        return self.Numero
+    
+    def logradouro(self):
+        return self.Logradouro
+    
+    def referencia(self):
+        return self.PontoDeReferencia
 
 
 class cEstimativa:
     """Armazena estimativas de horários de chegada de uma determinada linha"""
-    def __init__(self):
-        self.acessibilidade = False;
-        self.Linha = None
-        self.HorarioDePartida = 0
-        self.HorarioDaTransmissao = 0
-        self.HorarioDeChegada = 0
-        self.Itinerarioid = 0
+    
+    def __init__(self, _acess, _linha, _horaPartida, _horaTransmissao, _horaChegada, _itinId):
+        self.Acessibilidade = _acess;
+        self.Linha = _linha
+        self.HorarioDePartida = datetime.datetime.fromtimestamp(_horaPartida/1000)
+        self.HorarioDaTransmissao = datetime.datetime.fromtimestamp(_horaTransmissao/1000)
+        self.HorarioDeChegada = datetime.datetime.fromtimestamp(_horaChegada/1000)
+        self.ItinerarioId = _itinId
+        
+    def acessibilidade(self):
+        return self.Acessibilidade
+    
+    def linha(self):
+        return self.Linha
+    
+    def linha_bandeira(self):
+        return self.linha().bandeira()
+        
+    def linha_numero(self):
+        return self.linha().numero()
+        
+    def horario_partida(self):
+        return self.HorarioDePartida
+        
+    def horario_transmissao(self):
+        return self.HorarioDaTransmissao
+        
+    def horario_chegada(self):
+        return self.HorarioDeChegada
+    
+    def set_linha(self, _linha):
+        self.Linha = _linha
+        
+    def itinerario_id(self):
+        return self.ItinerarioId
+        
 
 
 def obter_estimativas_de_ponto(pontoIdentificador):
@@ -47,8 +99,7 @@ def obter_estimativas_de_ponto(pontoIdentificador):
     
     :param pontoIdentificador: Numero de identificação do ponto do qual se deseja obter as estimativas
     
-    :returns: Retorna um dicionário de estimativas cujo a chave é uma tupple no formato (NumeroDaLinha, Bandeira)
-    e os itens são listas de objetos do tipo cEstimativa pertencentes a cada linha de ônibus 
+    :returns: Retorna uma lista de objetos do tipo cEstimativa 
     """
     pontosFile = open('JSON/PontosDeOnibusVitoria.json')
     pontosJSON = json.load(pontosFile)
@@ -71,16 +122,11 @@ def obter_estimativas_de_ponto(pontoIdentificador):
     listaItinerarioIds = []
     
     for est in responseJSON['estimativas']:
-        Estimativa = cEstimativa()
-        Estimativa.acessibilidade = est[u'acessibilidade']
-        Estimativa.HorarioDePartida = est[u'horarioDePartida']
-        Estimativa.HorarioDaTransmissao = est[u'horarioDaTransmissao']
-        Estimativa.HorarioDeChegada = est[u'horarioNaOrigem']
-        Estimativa.ItinerarioId = est[u'itinerarioId']
+        Estimativa = cEstimativa(est[u'acessibilidade'], None, est[u'horarioDePartida'], est[u'horarioDaTransmissao'], est[u'horarioNaOrigem'], est[u'itinerarioId'])
         
         listaEstimativas.append(Estimativa)
         
-        listaItinerarioIds.append(Estimativa.ItinerarioId)
+        listaItinerarioIds.append(Estimativa.itinerario_id())
 
     data = json.dumps({"listaIds":listaItinerarioIds})
     url = 'https://pmv.geocontrol.com.br/pontovitoria/svc/json/db/listarItinerarios'
@@ -90,22 +136,15 @@ def obter_estimativas_de_ponto(pontoIdentificador):
     f.close()
     
     itinsDict = {}
-    dictEstimativas = {}
     
     for itin in responseJSON[u'itinerarios']:
         linha = cLinhaDeOnibus(itin[u'id'], itin[u'bandeira'], itin[u'identificadorLinha'])
-        itinsDict[linha.id] = linha
+        itinsDict[linha.id()] = linha
         
     for est in listaEstimativas:
-        est.Linha = itinsDict[est.ItinerarioId]
-        
-        if dictEstimativas.has_key((est.Linha.Numero, est.Linha.Bandeira)):
-            dictEstimativas[(est.Linha.Numero, est.Linha.Bandeira)].append(est)
-        else:
-            dictEstimativas[(est.Linha.Numero, est.Linha.Bandeira)] = []
-            dictEstimativas[(est.Linha.Numero, est.Linha.Bandeira)].append(est)
+        est.set_linha(itinsDict[est.itinerario_id()])
     
-    return dictEstimativas
+    return listaEstimativas
     
 def obter_pontos(listaIdentificadores):
     """Retorna informações sobre pontos de ônibus(Logradouro, referência, etc)
@@ -123,7 +162,7 @@ def obter_pontos(listaIdentificadores):
 
     for ponto in pontosJSON['pontosDeParada']:
         if ponto['identificador'] in listaIdentificadores:
-            listaPontosDeParada.append(cPontoDeOnibus(ponto['id'], ponto['identificador'], ponto['logradouro'], ponto['descricao']))
+            listaPontosDeParada.append(cPontoDeOnibus(ponto['id'], ponto['identificador'], ponto['logradouro'], ponto['descricao'], ponto['linhas']))
         
         
     return listaPontosDeParada
@@ -153,7 +192,7 @@ def pesquisar_pontos(stringDeBusca):
     listaPontos = []
         
     for ponto in responseJSON[u'pontosDeParada']:
-        pnt = cPontoDeOnibus(ponto['id'], ponto['identificador'], ponto['logradouro'], ponto['descricao'])
+        pnt = cPontoDeOnibus(ponto['id'], ponto['identificador'], ponto['logradouro'], ponto['descricao'], ponto['linhas'])
         listaPontos.append(pnt)
 
     return listaPontos
@@ -193,7 +232,7 @@ def obter_pontos_de_parada(PontoIdentificador):
     listaPontos = []
         
     for ponto in responseJSON[u'pontosDeParada']:
-        pnt = cPontoDeOnibus(ponto['id'], ponto['identificador'], ponto['logradouro'], ponto['descricao'])
+        pnt = cPontoDeOnibus(ponto['id'], ponto['identificador'], ponto['logradouro'], ponto['descricao'], ponto['linhas'])
         listaPontos.append(pnt)
 
     return listaPontos
@@ -207,30 +246,11 @@ def obter_itinerario_de_linha(cdLinha):
     que fazem parte do itinerario da linha
     
     """
-    Itin = ItinerariosPMV.obter_itinerario(str(cdLinha).zfill(4))
+    
     pontosDoItinerario = []
-    TodosOsPontos = ObterTodosOsPontos()
-    pntosRuaDoItinerario = []
     
-    ItinCopy = []
-    
-    print 'Pesquisando Itinerario da linha... Aguarde'
-    
-    #removendo acentos
-    for it in set(Itin):
-        ItinCopy.append(normalize('NFKD', it.decode('utf-8')).encode('ASCII','ignore').lower())
-    
-    #buscando pontos que estao presentes nas ruas em que o onibus passa
-    for ponto in TodosOsPontos:
-        pontoLogradouro = normalize('NFKD', ponto.Logradouro).encode('ASCII','ignore').lower()
-        
-        if pontoLogradouro in ItinCopy:
-            pntosRuaDoItinerario.append(ponto)
-    
-    
-    #Analisando onibus que passam nesses pontos e verificando se a linha informada passa por eles
-    for ponto in pntosRuaDoItinerario:
-        if len(ExtraiEstimativasDeLinha(str(cdLinha).zfill(3), ObterEstimativasDePonto(ponto.id))) != 0:
+    for ponto in obter_todos_os_pontos():
+        if cdLinha in ponto.linhas():
             pontosDoItinerario.append(ponto)
     
     return pontosDoItinerario
@@ -249,8 +269,10 @@ def obter_todos_os_pontos():
     pontosJSON = json.load(pontosFile)
     
     for pnt in pontosJSON['pontosDeParada']:
-        p = cPontoDeOnibus(pnt['id'], pnt['identificador'], pnt['logradouro'], pnt['descricao'])        
+        p = cPontoDeOnibus(pnt['id'], pnt['identificador'], pnt['logradouro'], pnt['descricao'], pnt['linhas'])        
         pontos.append(p)
     
     return pontos
     
+if __name__ == "__main__":
+    cli(sys.argv[1:])

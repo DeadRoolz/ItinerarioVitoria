@@ -42,6 +42,11 @@ Atributos:
 * `Bandeira` - bandeira do ônibus(nome da linha) - Tipo: _str_
 * `Numero` - numero da linha - Tipo: _str_
 
+Métodos:
+* `id() : int` - retorna o id da linha
+* `bandeira() : str` - retorna a bandeira da linha
+* `numero() : str` - retorna o numero da linha
+
 \# _***cPontoDeOnibus***_
 
 Classe que representa os pontos de ônibus.
@@ -52,17 +57,38 @@ Atributos:
 * `Logradouro` - logradouro em que o ponto está situado - Tipo: _str_
 * `PontoDeReferencia` - Ponto de referência próximo - Tipo: _str_
 
+Métodos:
+* `linhas() : List cPontoDeOnibus` - Retorna uma lista de objetos do tipo cPontoDeOnibus representando as linhas que passam nesse ponto
+
+* `numero() : str` - Retorna o número identificador do ponto
+
+* `logradouro() : str` - Retorna o logradouro em que o ponto está situado
+
+* `referencia() : str` - Retorna o ponto de referência desse ponto
+
 \# _***cEstimativa***_
 
 Classe que representa estimativas de horários de chegada dos ônibus.
 
 Atributos: 
-* `acessibilidade` - indica se o ponto possui acessibilidade para deficientes - Tipo: _Boolean_
+* `Acessibilidade` - indica se o ponto possui acessibilidade para deficientes - Tipo: _Boolean_
 * `Linha` - Objeto que representa a linha de ônibus pertencente à estimativa - Tipo: _cLinhaDeOnibus_
 * `HorarioDePartida` - horário de partida do ônibus no ponto final (formato unix timestamp em milisegundos)  - Tipo: _int_
 * `HorarioDeTransmissao` - último horário em que o ônibus transmitiu sua localização (formato unix timestamp em milisegundos)  - Tipo: _int_
 * `HorarioDeChegada` - horário previsto de chegada no ponto (formato unix timestamp em milisegundos)  - Tipo: _int_
 * `Itinerarioid` - id da linha de ônibus ligada à estimativa  - Tipo: _int_
+
+Métodos:
+* `acessibilidade() : boolean` - Retorna True se o ônibus for acessível para deficientes e False caso contrário
+* `linha() : cLinhaDeOnibus` - Retorna objeto do tipo cLinhaDeOnibus representando a linha de ônibus a qual essa estimativa pertence
+* `linha_bandeira() : str` - Retorna a bandeira da linha a qual pertence essa estimativa
+* `linha_numero() : str` - Retorna o numero da linha a qual pertence essa estimativa
+* `horario_partida() : datetime` - retorna o horário de partida do ônibus do ponto final
+* `horario_transmissao() : datetime` - retorna o último horário em que o ônibus transmitiu sua localização
+* `horario_chegada() : datetime` - retorna o horário de chegada do ônibus no ponto
+* `set_linha()` - seta a linha pertencente a essa estimativa
+* `itinerario_id() : int` - retorna o id da linha a qual pertence essa estimativa
+
 
 ### Métodos
 
@@ -72,25 +98,7 @@ Retorna estimativas de horário de chegada de todos os ônibus em um ponto
 
 `@Parâmetro pontoIdentificador` - String contendo o número de identificação do ponto do qual se deseja obter as estimativas
 
-`@Retorno` - Retorna um dicionário de estimativas cujo a chave é uma tupple no formato (NumeroDaLinha, Bandeira)
-e os itens são listas de objetos do tipo cEstimativa pertencentes a cada linha de ônibus.
-
-Exemplo de uso:
-
-```python
-from itinerario_vitoria import *
-import datetime
-
-dictEstimativas = obter_estimativas_de_ponto('4046')
-for key in dictEstimativas.keys():
-    print '---------------'
-    print 'Linha: ' + key[0] + ' - ' + key[1]
-    print '---------------'
-    
-    for estimativa in dictEstimativas[key]:
-        print 'Horario de Chegada: ' + datetime.datetime.fromtimestamp(estimativa.HorarioDeChegada/1000).ctime()
-	print ''
-```
+`@Retorno` - Retorna uma list de cEstimativa
 
 
 \# ***obter\_pontos\(listaIdentificadores\)***

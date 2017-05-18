@@ -33,7 +33,7 @@ import argparse
 
 from itinerario_vitoria import *
 
-def main(argv):
+def cli(argv):
     
         
     parser = argparse.ArgumentParser(description = u'Exibe estimativas \
@@ -78,32 +78,39 @@ def main(argv):
         if (args['ObterEstimativas'] == False):
             
             for ponto in pontos:
-                print 'Numero: ' + str(ponto.Numero)
-                print 'Logradouro: ' + ponto.Logradouro
-                print 'Ponto de Referencia: ' + ponto.PontoDeReferencia
+                print 'Numero: ' + str(ponto.numero())
+                print 'Logradouro: ' + ponto.logradouro()
+                print 'Ponto de Referencia: ' + ponto.referencia()
                 print '----------------------------------------------------------'
         
         else:
             
-            ListaDeEstimativas = []
-            
             for ponto in pontos:
-                print 'Numero: ' + str(ponto.Numero)
-                print 'Logradouro: ' + ponto.Logradouro
-                print 'Ponto de Referencia: ' + ponto.PontoDeReferencia
+                print 'Numero: ' + str(ponto.numero())
+                print 'Logradouro: ' + ponto.logradouro()
+                print 'Ponto de Referencia: ' + ponto.referencia()
                 print ''
                 
-                dictEstimativas = obter_estimativas_de_ponto(ponto.Numero)
+                listEstimativas = obter_estimativas_de_ponto(ponto.numero())
+                
+                dictEstimativas = {}
+                
+                for est in listEstimativas:
+                    if dictEstimativas.has_key((est.linha().numero(), est.linha().bandeira())):
+                        dictEstimativas[(est.linha().numero(), est.linha().bandeira())].append(est)
+                    else:
+                        dictEstimativas[(est.linha().numero(), est.linha().bandeira())] = []
+                        dictEstimativas[(est.linha().numero(), est.linha().bandeira())].append(est)
                 
                 for key in dictEstimativas.keys():
+                    msg = '> Linha: ' + key[0] + ' - ' + key[1]
+                    print '-' * (len(msg))
+                    print msg
+                    print '-' * (len(msg))
                     
-                    print '---------------------------------------------------------------------'
-                    print '> Linha: ' + key[0] + ' - ' + key[1]
-                    print '---------------------------------------------------------------------'
-                    
-                    for estimativa in sorted(dictEstimativas[key], key=lambda est: est.HorarioDeChegada):                        
-                        print '>> ' + 'acessibilidade: ' + str(estimativa.acessibilidade)
-                        print '>> ' + 'Horario de Chegada: ' + datetime.datetime.fromtimestamp(estimativa.HorarioDeChegada/1000).ctime()
+                    for estimativa in sorted(dictEstimativas[key], key=lambda est: est.horario_chegada()):                        
+                        print '>> ' + 'acessibilidade: ' + str(estimativa.acessibilidade())
+                        print '>> ' + 'Horario de Chegada: ' + estimativa.horario_chegada().ctime()
                         print ''
                 
         
@@ -113,13 +120,28 @@ def main(argv):
         pontos = pesquisar_pontos(stringDeBusca)
             
         for ponto in pontos:
-            print 'Numero: ' + str(ponto.Numero)
-            print 'Logradouro: ' + ponto.Logradouro
-            print 'Ponto de Referencia: ' + ponto.PontoDeReferencia
+            print 'Numero: ' + str(ponto.numero())
+            print 'Logradouro: ' + ponto.logradouro()
+            print 'Ponto de Referencia: ' + ponto.referencia()
             print '----------------------------------------------------------'
         
         print '-FIM-'
-        
+    
+    elif args['ObterItinerario']:
+        if len(listaDeLinhas) > 0:
+            for NumeroLinha in listaDeLinhas:
+                for ponto in obter_itinerario_de_linha(NumeroLinha):
+                    print 'Numero: ' + str(ponto.numero())
+                    print 'Logradouro: ' + ponto.logradouro()
+                    print 'Ponto de Referencia: ' + ponto.referencia()
+                    print '---------------------------------------------------'
+        else:
+            parser.print_help()
+            exit()
+            
+                    
+        print '-FIM-'
+    
     elif (len(listaDeLinhas) > 0):
         
         if (len(listaDePontos) > 0) and ((args['ObterEstimativas'] == True)):
@@ -129,26 +151,39 @@ def main(argv):
             for NumeroLinha in listaDeLinhas:
                 for ponto in pontos:
                     
-                    print 'Numero: ' + str(ponto.Numero)
-                    print 'Logradouro: ' + ponto.Logradouro
-                    print 'Ponto de Referencia: ' + ponto.PontoDeReferencia
+                    print 'Numero: ' + str(ponto.numero())
+                    print 'Logradouro: ' + ponto.logradouro()
+                    print 'Ponto de Referencia: ' + ponto.referencia()
                     
-                    dictEstimativas = obter_estimativas_de_ponto(ponto.Numero)
+                    listEstimativas = obter_estimativas_de_ponto(ponto.numero())
+                    dictEstimativas = {}
+                
+                    for est in listEstimativas:
+                        if dictEstimativas.has_key((est.linha().numero(), est.linha().bandeira())):
+                            dictEstimativas[(est.linha().numero(), est.linha().bandeira())].append(est)
+                        else:
+                            dictEstimativas[(est.linha().numero(), est.linha().bandeira())] = []
+                            dictEstimativas[(est.linha().numero(), est.linha().bandeira())].append(est)
+                            
                     
                     for key in dictEstimativas.keys():
                         if key[0] == NumeroLinha:
-                            print '---------------------------------------------------------------------'
-                            print '> Linha: ' + key[0] + ' - ' + key[1]
-                            print '---------------------------------------------------------------------'
-                    
-                            for estimativa in sorted(dictEstimativas[key], key=lambda est: est.HorarioDeChegada):                        
-                                print '>> ' + 'acessibilidade: ' + str(estimativa.acessibilidade)
-                                print '>> ' + 'Horario de Chegada: ' + datetime.datetime.fromtimestamp(estimativa.HorarioDeChegada/1000).ctime()
+                            msg = '> Linha: ' + key[0] + ' - ' + key[1]
+                            print '-' * (len(msg))
+                            print msg
+                            print '-' * (len(msg))
+                            for estimativa in sorted(dictEstimativas[key], key=lambda est: est.horario_chegada()):                        
+                                print '>> ' + 'acessibilidade: ' + str(estimativa.acessibilidade())
+                                print '>> ' + 'Horario de Chegada: ' + estimativa.horario_chegada().ctime()
                                 print ''
-    
+        
+        else:
+            parser.print_help()
+            exit()
+        
         print '-FIM-'
     else:
         parser.print_help()
+        exit()
 
-if __name__ == "__main__":
-    main(sys.argv[1:])
+
