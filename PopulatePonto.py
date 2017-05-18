@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 '''
-Identifica quais linhas de onibus passam nos pontos e grava
-nos pontos do arquivo PontosDeOnibusVitoria.json numa array chamada 'linhas'
+Baixa, no Ponto Vitória, todos os pontos e as linhas que passam nesses pontos
+e grava no arquivo PontosDeOnibusVitoria.json
 '''
 
 from __future__ import print_function
