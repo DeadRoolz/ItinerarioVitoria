@@ -185,5 +185,3 @@ def cli(argv):
     else:
         parser.print_help()
         exit()
-
-

@@ -8,7 +8,7 @@ O módulo contém um script(main.py) que permite fazer o uso de algumas funçõe
 ```
 python main.py -e -p 4046 -l 074
 ```
-O trecho de código abaixo mostra um exemplo de uso da função obter\_estimativas\_de\_ponto para mostrar as estimativas de horários de chegada das linhas que passam naquele ponto:
+O trecho de código abaixo mostra um exemplo de uso da função obter\_estimativas\_de\_ponto para mostrar as estimativas de horários de chegada das linhas que passam no ponto '4046':
 
 ```python
 from itinerario_vitoria import *
