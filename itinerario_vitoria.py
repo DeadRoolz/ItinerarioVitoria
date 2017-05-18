@@ -182,18 +182,17 @@ def pesquisar_pontos(stringDeBusca):
     responseJSON = json.load(f)
     f.close()
     
-    data = json.dumps({"listaIds":responseJSON['pontosDeParada']})
-    url = 'https://pmv.geocontrol.com.br/pontovitoria/svc/json/db/listarPontosDeParada'
-    req = urllib2.Request(url, data, {'Content-Type': 'application/json'})
-    f = urllib2.urlopen(req)
-    responseJSON = json.load(f)
-    f.close()
+    listaIds = responseJSON['pontosDeParada']
+    
+    pontosFile = open('JSON/PontosDeOnibusVitoria.json')
+    pontosJSON = json.load(pontosFile)
     
     listaPontos = []
         
-    for ponto in responseJSON[u'pontosDeParada']:
-        pnt = cPontoDeOnibus(ponto['id'], ponto['identificador'], ponto['logradouro'], ponto['descricao'], ponto['linhas'])
-        listaPontos.append(pnt)
+    for ponto in pontosJSON['pontosDeParada']:
+        if ponto['id'] in listaIds:
+            pnt = cPontoDeOnibus(ponto['id'], ponto['identificador'], ponto['logradouro'], ponto['descricao'], ponto['linhas'])
+            listaPontos.append(pnt)
 
     return listaPontos
 

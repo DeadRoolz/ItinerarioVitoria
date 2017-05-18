@@ -116,7 +116,7 @@ def cli(argv):
         
         print '-FIM-'
         
-    elif (len(stringDeBusca) >= 4) and (len(listaDePontos) <= 0) and (len(listaDeLinhas) <= 0):
+    elif (len(stringDeBusca) >= 3) and (len(listaDePontos) <= 0) and (len(listaDeLinhas) <= 0):
         pontos = pesquisar_pontos(stringDeBusca)
             
         for ponto in pontos:
